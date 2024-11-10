@@ -41,6 +41,8 @@ product_info_text = None
 lead_info_text = None
 email_info_text = None
 
+sample = Sample()
+
 
 # Title of the app
 st.title("Colca System - Automated AI QA")
@@ -51,7 +53,7 @@ st.markdown('<h3 style="text-align: center;"> File Upload </h3>', unsafe_allow_h
 
 ### Product Information
 st.markdown("### Product Information")
-product_option = st.radio("Choose input method", ("Upload a file", "Paste text"), key="product_option")
+product_option = st.radio("Choose input method", ("Upload a file", "Paste text", "Use Sample Product Info"), key="product_option")
 
 # Case 1: Upload a CSV file
 if product_option == "Upload a file":
@@ -65,11 +67,14 @@ elif product_option == "Paste text":
     product_info_text = st.text_area("Paste your text here")
     if product_info_text:
         product_info_text = StringIO(product_info_text).read()
+
+elif product_option == "Use Sample Product Info":
+    product_info_text = st.text_area("Edit the Sample File here", sample.product_info)
   
 
 ### Lead Information
 st.markdown("### Lead Information")
-lead_option = st.radio("Choose input method", ("Upload a file", "Paste text"), key="lead_info")
+lead_option = st.radio("Choose input method", ("Upload a file", "Paste text", "Use Sample Lead Info"), key="lead_info")
 
 # Case 1: Upload a CSV file
 if lead_option == "Upload a file":
@@ -84,9 +89,12 @@ elif lead_option == "Paste text":
     if lead_info_text:
         lead_info_text = StringIO(lead_info_text).read()
 
+elif lead_option == "Use Sample Lead Info":
+    lead_info_text = st.text_area("Edit the Sample File here", sample.lead_info)
+
 ### Email Content Information
 st.markdown("### Email Content")
-email_option = st.radio("Choose input method", ("Upload a file", "Paste text"), key="email_info")
+email_option = st.radio("Choose input method", ("Upload a file", "Paste text", "Use Sample Email Content"), key="email_info")
 
 # Case 1: Upload a CSV file
 if email_option == "Upload a file":
@@ -100,6 +108,9 @@ elif email_option == "Paste text":
     email_info_text = st.text_area("Paste your text here")
     if email_info_text:
         email_info_text = StringIO(email_info_text).read()
+
+elif email_option == "Use Sample Email Content":
+    email_info_text = st.text_area("Edit the Sample File here", sample.email_content)
 
 st.markdown("---")
 
