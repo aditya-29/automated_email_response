@@ -1,4 +1,5 @@
 from groq import Groq
+import streamlit as st
 
 class Chat:
     def __init__(self,
@@ -25,8 +26,11 @@ class Chat:
         self.read_api_key()
 
     def read_api_key(self):
-        with open(self.api_key_path, "r") as f:
-            api_key = f.readline()
+        # try:
+        #     with open(self.api_key_path, "r") as f:
+        #         api_key = f.readline()
+        # except:
+        api_key = st.secrets["groq_api_key"]
         self.client = Groq(api_key=api_key)
 
     def __construct_messages__(self, user_msgs, system_msg=None, assistant_msgs=None):
